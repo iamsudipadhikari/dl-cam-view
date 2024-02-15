@@ -1,0 +1,53 @@
+
+<div class="container">
+  <div style="width: 650px; padding: 0 10px">
+    <h2 *ngIf="!captured">Camera Access: </h2>
+    <video #video width="640" height="480" autoplay playsinline></video>
+
+    <div class="button-container">
+      <button class="custom-button" (click)="capture()" [disabled]="capturing || captured">
+        <ng-container *ngIf="!capturing">Capture</ng-container>
+        <ng-container *ngIf="capturing">Capturing...</ng-container>
+      </button>
+      <button class="custom-button" (click)="captureAgain()" [disabled]="!captured">
+        Capture Again
+      </button>
+    </div>
+
+    <div>
+      <h2 *ngIf="captured">Captured Image: </h2>
+      <canvas #canvas width="640" height="480"></canvas>
+    </div>
+  </div>
+  <div style="color: red;" *ngIf="error">{{error}}</div>
+  <div style="padding: 0 10px">
+    <div class="text-container" *ngIf="captured">
+      <h2>Extract Text </h2>
+
+      <div class="button-container">
+        <button class="custom-button" (click)="extractUsingBackend()">Use Backend</button>
+        <button class="custom-button" (click)="extractUsingWeb()">Use Web</button>
+      </div>
+
+      <div *ngIf="isLoading">Please Wait...</div>
+
+      <div *ngIf="extractedBackendText">
+        <h2>Extracted Text Using Backend Service and Transformers:</h2>
+        <div>
+          <div>State: {{ extractedBackendText.state }}</div>
+          <div>Name: {{ extractedBackendText.name }}</div>
+          <div>Address: {{ extractedBackendText.address }}</div>
+          <div>Date of Birth: {{ extractedBackendText.date_of_birth }}</div>
+          <div>Gender: {{ extractedBackendText.gender }}</div>
+          <div>Height: {{ extractedBackendText.height }}</div>
+          <div>Issued Date: {{ extractedBackendText.issued_date }}</div>
+          <div>Expiry Date: {{ extractedBackendText.expiry_date }}</div>
+        </div>
+      </div>
+      <div *ngIf="extractedText">
+        <h2>Extracted Text Using Web Browser:</h2>
+        <p>{{ extractedText }}</p>
+      </div>
+    </div>
+  </div>
+</div>
