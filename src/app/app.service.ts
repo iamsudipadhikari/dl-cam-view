@@ -6,10 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppService {
+
+  url = "https://sudipadhikari-dl-extraction.hf.space";
   public constructor(private http:HttpClient) {
   }
 
   extractData(formData:any){
-    return this.http.post("http://localhost:5000/process-image", formData);
+    return this.http.post(`${this.url}/process-image`, formData);
+  }
+
+  getCurrentDateFromServer(): Observable<{ current_time: string }> {
+    return this.http.get<{ current_time: string }>(`${this.url}/now`);
   }
 }

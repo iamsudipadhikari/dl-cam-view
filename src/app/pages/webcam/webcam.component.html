@@ -1,7 +1,10 @@
-
+<div style="padding: 0 10px;">
+  <h2 style="color: #0056b3">Driver's License Reader</h2>
+  <div style="color: #0056b3"><b>{{dateNow}} (GMT)</b></div>
+</div>
 <div class="container">
   <div style="width: 650px; padding: 0 10px">
-    <h2 *ngIf="!captured">Camera Access: </h2>
+    <h3 *ngIf="!captured">Camera Access: </h3>
     <video #video width="640" height="480" autoplay playsinline></video>
 
     <div class="button-container">
@@ -15,7 +18,7 @@
     </div>
 
     <div>
-      <h2 *ngIf="captured">Captured Image: </h2>
+      <h3 *ngIf="captured">Captured Image: </h3>
       <canvas #canvas width="640" height="480"></canvas>
     </div>
   </div>
@@ -33,7 +36,7 @@
       <a href="">View Runnable Backend Work</a>
 
       <div *ngIf="extractedBackendText">
-        <h2>Extracted Text Using Backend Service and Transformers:</h2>
+        <h3>Extracted Text Using Backend Service and Transformers:</h3>
         <div>
           <div>State: {{ extractedBackendText.state }}</div>
           <div>Name: {{ extractedBackendText.name }}</div>
@@ -46,7 +49,7 @@
         </div>
       </div>
       <div *ngIf="extractedText">
-        <h2>Extracted Text Using Web Browser:</h2>
+        <h3>Extracted Text Using Web Browser:</h3>
         <p>{{ extractedText }}</p>
       </div>
     </div>

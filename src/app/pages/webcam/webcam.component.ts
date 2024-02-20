@@ -18,6 +18,7 @@ export class WebcamComponent implements AfterViewInit {
   captured: boolean = false;
   isLoading: boolean = false;
   error: string | undefined;
+  dateNow: string = '';
 
   constructor(private appService: AppService) { }
 
@@ -26,6 +27,20 @@ export class WebcamComponent implements AfterViewInit {
     this.initializeWorker();
   }
 
+  ngOnInit(){
+    this.getDate();
+  }
+
+  getDate(){
+    this.appService.getCurrentDateFromServer().subscribe(
+      response => {
+        this.dateNow = response.current_time;
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+  }
   initCamera() {
     navigator.mediaDevices.getUserMedia({ video: true })
       .then(stream => {
